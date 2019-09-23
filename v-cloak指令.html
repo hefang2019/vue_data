@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="APP">
+        <!-- 使用v-cloak能够解决插值表达式闪烁的问题 -->
+        <p v-cloak>{{msg}}</p>
+        <!-- v-text -->
+        <h4 v-text="msg"></h4>
+        <div v-html="msg2"></div>
+        <!-- v-bind指令可以简写为 ：要绑定的属性 v-bind中可以写合法的JS表达式-->
+        <input type="button" value="提交" :title="mytitle + '你大爷'" v-on>
+        <!-- vue中提供v-on：事件绑定机制 -->
+        <input type="button" value="按钮" v-on:click="show">
+
+    </div>
+</body>
+
+</html>
+<script src="./vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#APP',
+        data: {
+            msg: '123',
+            msg2: '<h1>我是一个h1的标签</h1>',
+            mytitle: '这是一个提交按钮'
+        },
+        methods: { //这个methods属性中定义了当前vue实例所有可用的方法
+            show() {
+                alert('Hello')
+            }
+
+        }
+    })
+    // document.getElementById('btn').onclick = function () {
+    //     alert('123')
+    // }
+</script>

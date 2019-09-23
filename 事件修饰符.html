@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .inner {
+            height: 50px;
+            background-color: aqua;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- .stop阻止冒泡 -->
+        <!-- <div class="inner" @click="divBtn">
+            <input type="button" value="点击" @click.stop="btn">
+        </div> -->
+        <!-- .prevent阻止事件默认行为 -->
+        <!-- <a href="http://www.baidu.com" @click.prevent="linkClick">去百度</a> -->
+        <!-- 使用.capture实现捕获触发事件的机制 从外到里执行事件 -->
+        <!-- 使用.self实现只有点击当前元素的时候，才会触发事件处理函数 -->
+        <!-- <div class="inner" @click.self="divBtn">
+            <input type="button" value="点击" @click="btn">
+        </div> -->
+        <!-- 使用.once只执行一次 -->
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+                divBtn() {
+                    console.log('这是div事件')
+                },
+                btn() {
+                    console.log('这是表单事件')
+                },
+                linkClick() {
+                    console.log('触发了连接的点击事件')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

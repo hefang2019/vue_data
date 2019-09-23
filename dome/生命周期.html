@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" @click="msg='no'" value="修改">
+        <p id="h2">{{msg}}</p>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                msg: 'ok'
+            },
+            methods: {
+                show() {
+                    console.log('执行show方法')
+                }
+            },
+            beforeCreate() { //实例完全创建出来之前，会执行它
+                // console.log(this.msg)
+                //在beforeCreate生命周期函数执行的时候，data和methods中的数据都还没有初始化
+            },
+            created() {
+                //在created中，data和methods都已经初始化好了。
+                //如果要调用methods中的方法或者操作data中的数据，最早只能在created中操作
+                console.log(this.msg)
+                this.show()
+            },
+            beforeMount() {
+                //模板已经编译完成了，但是尚未把模版渲染到页面中
+
+            },
+            mounted() {
+                console.log(document.getElementById('h2'))
+                //表示内存中的模版已经真实挂载到了页面中，用户已经可以看到渲染好的页面了，如果要操作DOM节点，最早要在mounted中进行
+            },
+            beforeUpdate() {
+                //此阶段数据已经被更新了，页面深山尚未更新，还是旧的数据
+                console.log(document.getElementById('h2').innerText)
+                console.log(this.msg)
+            },
+
+            updated() {
+                //页面和data数据已经保持同步了
+                console.log(document.getElementById('h2').innerText)
+                console.log(this.msg)
+            },
+            beforeDestroy() {
+                //运行阶段进入销毁阶段，还未执行销毁状态
+            },
+            destroy() {
+                //进入此阶段时，实例已经被完全销毁了，
+            }
+        })
+    </script>
+</body>
+
+</html>

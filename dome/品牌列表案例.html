@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" href="./bootstrap.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label>
+                    id:
+                    <input type="text" class="form-control" v-model="id">
+                </label>
+                <label>
+                    Name:
+                    <input type="text" class="form-control" v-model="name">
+                </label>
+                <input type="button" value="添加" class="btn btn-primary" @click="add">
+                <label>
+                    搜索名称关键字:
+                    <input type="text" class="form-control" v-model="keywords">
+                </label>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>序列</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item of search(keywords)" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td>
+                        <a href="" @click.prevent="del(item.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                list: [{
+                    id: 1,
+                    name: '奔驰',
+                    ctime: new Date()
+                }, {
+                    id: 2,
+                    name: '宝马',
+                    ctime: new Date()
+                }, {
+                    id: 3,
+                    name: '奥迪',
+                    ctime: new Date()
+                }],
+                id: '',
+                name: '',
+                keywords: ''
+            },
+            methods: {
+                add() {
+                    //获取到id和name的value 组织出一个对象，把这个对象，调用数组的方法添加到当前data上的list中
+                    this.list.push({
+                        id: this.id,
+                        name: this.name,
+                        ctime: new Date()
+                    })
+                    this.id = this.name = ''
+                },
+                del(id) {
+                    //根据id删除数据 数组新增的方法some  
+                    // this.list.some((item, i) => {
+                    //     if (item.id == id) {
+                    //         this.list.splice(i, 1) //删除
+                    //         return true; //终止循环
+                    //     }
+                    // })
+                    //根据index查找，findIndex（）方法
+                    let index = this.list.findIndex((item) => {
+                        if (item.id == id) {
+                            return true
+                        }
+                    })
+                    this.list.splice(index, 1)
+                },
+                search(keywords) { //根据关键字进行数据的搜索
+                    // let newList = []
+                    // this.list.forEach(item => {
+                    //     if (item.name.indexOf(keywords) != -1) {
+                    //         newList.push(item)
+                    //     }
+                    // });
+                    // return newList
+                    //数组的新方法 forEach some filter findIdex 都会对数组中的每一项，进行遍历，执行相关操作
+                    return this.list.filter(item => {
+                        //ES6中为字符串提供了一个新方法，string.prototype.includes(包含的字符串)返回布尔值
+                        if (item.name.includes(keywords)) {
+                            return item
+                        }
+                    })
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

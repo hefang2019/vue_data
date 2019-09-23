@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com @func="show"></com>
+    </div>
+    <template id="tmpl">
+        <div>
+            <!-- 父组件向子组件传递方法，使用的事件绑定机制 当我们自定义了一个事件属性之后，那么子组件就能通过某些方式来调用传递的方法了 -->
+            <h1>这是子组件</h1>
+            <input type="button" value="子组件按钮，点击它，触发父组件身上传递过来的方法" @click="myclick">
+        </div>
+    </template>
+    <script>
+        let com = {
+            template: '#tmpl',
+            data() {
+                return {
+                    son: {
+                        name: '大头儿子',
+                        age: 8
+                    }
+                }
+            },
+            methods: {
+                myclick() {
+                    //点击子组件的按钮时，如何拿到父组件传递过来的方法，并且调用这个方法
+                    //emit：是触发，调用的意思
+                    //调用父组件的方法，并向父组件传参
+                    this.$emit('func', this.son)
+                }
+            }
+        }
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                dataFormSon: null
+            },
+            methods: {
+                show(data) {
+                    this.dataFormSon = data;
+                }
+            },
+            components: {
+                com,
+
+            }
+        })
+    </script>
+</body>
+
+</html>

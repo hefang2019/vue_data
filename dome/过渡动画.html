@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        /* 进入之前状态 */
+        .v-enter,
+        /* 离开之后状态 */
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(250px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.4s ease;
+        }
+
+        .my-enter,
+        .my-leave-to {
+            opacity: 0;
+            transform: translateY(250px);
+        }
+
+        .my-enter-active,
+        .my-leave-active {
+            transition: all 0.8s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-enter-active   v-leave-active -->
+        <input type="button" value="点击" @click="flag=!flag">
+        <!-- 使用transition元素把需要被动画控制的元素包起来 -->
+        <transition>
+            <h3 v-show="flag">这是一个h3</h3>
+
+        </transition>
+        <hr>
+        <input type="button" value="点击" @click="flag2=!flag2">
+        <transition name="my">
+            <h1 v-show="flag2">来打我呀！</h1>
+        </transition>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                flag: false,
+                flag2: false
+            },
+            methods: {
+                // show() {
+                //     this.flag = !this.flag;
+                // }
+            }
+        })
+    </script>
+</body>
+
+</html>

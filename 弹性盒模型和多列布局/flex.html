@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .box {
+            width: 400px;
+            height: 50px;
+            border: 1px solid red;
+            display: flex;
+            overflow: auto;
+        }
+
+        li {
+            width: 100px;
+            /* flex-shrink  取值为number  默认为1会被压缩，0为不压缩 */
+            flex-shrink: 0;
+            flex-basis: 120px;
+            /* flex-basis---设置子元素的宽度，相当于width，设置了flex-basis之后width就没有效果了 */
+        }
+
+        .box li:nth-child(1) {
+            /* 
+                flex-grow---设置子元素放大比例
+                    取值为number，
+             */
+            flex-grow: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="box">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+    </ul>
+</body>
+
+</html>

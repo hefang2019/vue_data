@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="开始" @click="lang">
+        <input type="button" value="停止" @click="stop">
+        <h3>{{msg}}</h3>
+    </div>
+</body>
+
+</html>
+<script src="./vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: '猥琐发育,别浪··！',
+            intervalId: null
+        },
+        methods: {
+            lang() {
+                // console.log(this.msg)
+                // 箭头函数里面的this与外部保持一致，
+                if (this.intervalId != null) return;
+                //判断定时器是否已经开启，如果开启就不调用这个方法
+                this.intervalId = setInterval(() => {
+                    let start = this.msg.substring(0, 1);
+                    let end = this.msg.substring(1);
+                    this.msg = end + start;
+                }, 400)
+            },
+            stop() {
+                //清除定时器
+                clearInterval(this.intervalId);
+                //清除之后重新给intervalId赋值为null
+                this.intervalId = null;
+            }
+        }
+    })
+</script>

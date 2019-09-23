@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .box {
+            width: 1200px;
+            height: 600px;
+            border: 1px solid pink;
+            display: flex;
+        }
+
+        .list {
+            width: 300px;
+            height: 300px;
+            background: red;
+        }
+
+        .box .list:nth-child(1),
+        .box .list:nth-child(3) {
+            /* 
+                align-self--设置单个子元素在侧轴的对齐方式
+                    取值：
+                        flex-start 侧轴起点对齐
+                        flex-end--侧轴终点对齐
+                        center--居中对齐
+                        auto--默认，会继承父元素的align-items的属性值
+                        stretch --拉伸  当子元素没有设置高度的时候，这个属性值
+                        会把子元素的侧轴方向的高度或者亮度拉伸为父元素的宽度
+             */
+            /* order：1
+                    设置子元素排列顺序，取值为nuber 值越大越往后
+                 */
+            align-self: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="list"></div>
+        <div class="list"></div>
+        <div class="list"></div>
+        <div class="list"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <style>
+        .router-link-active {
+            color: red;
+            font-weight: 800;
+            font-style: italic;
+            font-size: 30px;
+        }
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translate(140px)
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+
+            transition: all .5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 在单面应用程序中，这种通过hash改变来切换页面的方式，称作前端路由 -->
+    <div id="app">
+        <!-- <a href="#/login">登录</a> -->
+        <!-- <a href="#/register">注册</a> -->
+        <router-link to="/login" tag="span">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <!--在路由中使用动画 -->
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+        <!-- 这是vue-router 提供的元素。专门来用当作占位符，将来路由规则匹配到的组件，就会展示到这个router-view里面去 所以可以把router-view当作一个占位符-->
+    </div>
+    <script>
+        let login = {
+            template: '<h1>登录组件</h1>'
+        }
+        let register = {
+            template: '<h1>注册组件</h1>'
+        }
+        let routerObj = new VueRouter({
+            //route //这个配置对象中的route表示 【路由匹配规则】的意思
+            // linkActiveClass:'myactive',
+            routes: [{
+                    path: '/',
+                    redirect: '/login' //重定向
+                }, {
+                    path: '/login',
+                    component: login
+                },
+                {
+                    path: '/register',
+                    component: register
+                }
+            ]
+        })
+        let vm = new Vue({
+            el: "#app",
+            data: {},
+            methods: {},
+            router: routerObj //将路由规则对象，注册到vm实例上，用来监听URL地址的变化，然后展示对应的组件
+        })
+    </script>
+</body>
+
+</html>
